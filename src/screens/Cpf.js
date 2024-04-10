@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-const CPF = () => {
+const Cpf = () => {
   const navigation = useNavigation();
   const [cpf, setCpf] = useState('');
 
@@ -84,5 +84,5 @@ const styles = StyleSheet.create({
   }
 });
 
-export default CPF;
+export default Cpf;
 ;

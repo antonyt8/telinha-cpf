@@ -24,7 +24,7 @@ const VerificationScreen = () => {
         style={styles.logo}
         resizeMode="contain"
       />
-      <Text style={styles.title}>Insira o código de verificação enviado para o seu número/e-mail</Text>
+      <Text style={styles.title}>Insira o código de verificação</Text>
       
       <TextInput
         style={styles.input}
@@ -83,4 +83,5 @@ const styles = StyleSheet.create({
 });
 
 export default VerificationScreen;
+
 
