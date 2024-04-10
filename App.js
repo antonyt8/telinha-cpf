@@ -2,8 +2,8 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import CPF from './cpf';
-import VerificationScreen from './verificationScreen';
+import CPF from './src/Cpf';
+import VerificationScreen from './src/VerificationScreen'
 
 const Stack = createStackNavigator();
 
@@ -11,8 +11,8 @@ const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="CPF">
-        <Stack.Screen name="CPF" component={cpf} options={{ title: 'Inserir CPF' }} />
-        <Stack.Screen name="Verification" component={verificationScreen} options={{ title: 'Verificar Código' }} />
+        <Stack.Screen name="CPF" component={Cpf} options={{ title: 'Inserir CPF' }} />
+        <Stack.Screen name="Verification" component={VerificationScreen} options={{ title: 'Verificar Código' }} />
       </Stack.Navigator>
     </NavigationContainer>
   );

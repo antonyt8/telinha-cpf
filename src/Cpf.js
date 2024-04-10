@@ -1,24 +1,23 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
-const VerificationScreen = () => {
-  const [code, setCode] = useState('');
+const CPF = () => {
+  const navigation = useNavigation();
+  const [cpf, setCpf] = useState('');
 
-  const verifyCode = () => {
+  const navigateToVerification = () => {
+    navigation.navigate('Verification'); // Nome da rota para a tela de verificação
+  };
 
-    if (typeof code !== Number) {
-      console.log('O código não é uma string');
-      return; // Se não for uma string, sair da função
-    }
-    // Lógica para verificar o código de verificação
-    if (code === '12345') {
-      // Código de verificação correto, você pode navegar para a próxima tela ou realizar outra ação aqui
-      console.log('Código de verificação correto');
-    } else {
-      // Código de verificação incorreto, você pode exibir uma mensagem de erro para o usuário
-      console.log('Código de verificação incorreto');
-    }
-  
+  const formatCpf = (value) => {
+    // Remove qualquer caractere não numérico do CPF
+    const numericValue = value.replace(/\D/g, '');
+
+    // Aplica a máscara do CPF
+    const formattedCpf = numericValue.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
+
+    setCpf(formattedCpf);
   };
 
   return (
@@ -28,18 +27,18 @@ const VerificationScreen = () => {
         style={styles.logo}
         resizeMode="contain"
       />
-      <Text style={styles.title}>Insira o código de verificação enviado para o seu número/e-mail</Text>
+      <Text style={styles.title}>Insira seu CPF: </Text>
       
       <TextInput
         style={styles.input}
-        value={code}
-        onChangeText={setCode}
-        placeholder="Código de verificação"
+        value={cpf}
+        onChangeText={formatCpf}
+        placeholder="CPF"
         keyboardType="numeric"
-        maxLength={6}
+        maxLength={14} // Adiciona um caractere a mais para a máscara do CPF
       />
-      <TouchableOpacity style={styles.button} onPress={verifyCode}>
-        <Text style={styles.buttonText}>Verificar código</Text>
+      <TouchableOpacity style={styles.button} onPress={navigateToVerification}>
+        <Text style={styles.buttonText}>Continuar</Text>
       </TouchableOpacity>
     </View>
   );
@@ -82,9 +81,8 @@ const styles = StyleSheet.create({
     width: 150, // Ajuste a largura conforme necessário
     height: 150, // Ajuste a altura conforme necessário
     marginBottom: 20
-    
   }
 });
 
-export default VerificationScreen;
-
+export default CPF;
+;

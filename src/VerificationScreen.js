@@ -1,13 +1,20 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
 
-const CPF = () => {
-  const navigation = useNavigation();
+const VerificationScreen = () => {
   const [code, setCode] = useState('');
 
-  const navigateToVerification = () => {
-    navigation.navigate('Verification'); // Nome da rota para a tela de verificação
+  const verifyCode = () => {
+
+    // Lógica para verificar o código de verificação
+    if (code === '12345') {
+      // Código de verificação correto, você pode navegar para a próxima tela ou realizar outra ação aqui
+      console.log('Código de verificação correto');
+    } else {
+      // Código de verificação incorreto, você pode exibir uma mensagem de erro para o usuário
+      console.log('Código de verificação incorreto');
+    }
+  
   };
 
   return (
@@ -17,18 +24,18 @@ const CPF = () => {
         style={styles.logo}
         resizeMode="contain"
       />
-      <Text style={styles.title}>Insira seu CPF: </Text>
+      <Text style={styles.title}>Insira o código de verificação enviado para o seu número/e-mail</Text>
       
       <TextInput
         style={styles.input}
         value={code}
         onChangeText={setCode}
-        placeholder="CPF"
+        placeholder="Código de verificação"
         keyboardType="numeric"
-        maxLength={11}
+        maxLength={6}
       />
-      <TouchableOpacity style={styles.button} onPress={navigateToVerification}>
-        <Text style={styles.buttonText}>Continuar</Text>
+      <TouchableOpacity style={styles.button} onPress={verifyCode}>
+        <Text style={styles.buttonText}>Verificar código</Text>
       </TouchableOpacity>
     </View>
   );
@@ -71,7 +78,9 @@ const styles = StyleSheet.create({
     width: 150, // Ajuste a largura conforme necessário
     height: 150, // Ajuste a altura conforme necessário
     marginBottom: 20
+    
   }
 });
 
-export default CPF;
+export default VerificationScreen;
+
