@@ -1,20 +1,19 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet, Modal } from 'react-native';
 
 const VerificationScreen = () => {
   const [code, setCode] = useState('');
+  const [modalVisible, setModalVisible] = useState(false); // Estado para controlar a visibilidade do modal
 
   const verifyCode = () => {
-
     // Lógica para verificar o código de verificação
-    if (code === '12345') {
-      // Código de verificação correto, você pode navegar para a próxima tela ou realizar outra ação aqui
-      console.log('Código de verificação correto');
+    if (code === '123456') {
+      // Código de verificação correto, exibe o modal
+      setModalVisible(true);
     } else {
       // Código de verificação incorreto, você pode exibir uma mensagem de erro para o usuário
-      console.log('Código de verificação incorreto');
+      alert('Código de verificação incorreto');
     }
-  
   };
 
   return (
@@ -37,6 +36,23 @@ const VerificationScreen = () => {
       <TouchableOpacity style={styles.button} onPress={verifyCode}>
         <Text style={styles.buttonText}>Verificar código</Text>
       </TouchableOpacity>
+
+      {/* Modal */}
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => setModalVisible(false)}
+      >
+        <View style={styles.modalContainer}>
+          <View style={styles.modalContent}>
+            <Text style={styles.modalText}> Código de verificação correto! </Text>
+            <TouchableOpacity style={styles.modalButton} onPress={() => setModalVisible(false)}>
+              <Text style={styles.modalButtonText}> Continuar </Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 };
@@ -52,7 +68,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
     marginBottom: 20,
   },
-  
   input: {
     width: '100%',
     borderWidth: 1,
@@ -75,13 +90,37 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   logo: {
-    width: 150, // Ajuste a largura conforme necessário
-    height: 150, // Ajuste a altura conforme necessário
+    width: 150,
+    height: 150,
     marginBottom: 20
-    
-  }
+  },
+  // Estilos para o modal
+  modalContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)', // Fundo escuro transparente
+  },
+  modalContent: {
+    backgroundColor: 'white',
+    padding: 20,
+    borderRadius: 10,
+    alignItems: 'center',
+  },
+  modalText: {
+    fontSize: 18,
+    marginBottom: 20,
+  },
+  modalButton: {
+    backgroundColor: 'red',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 20,
+  },
+  modalButtonText: {
+    color: 'white',
+    fontSize: 16,
+  },
 });
 
 export default VerificationScreen;
-
-
